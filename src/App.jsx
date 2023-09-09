@@ -4,21 +4,19 @@ const CHARACTER_COUNT = 4;
 const ROW_COUNT = 8;
 const COLUMN_COUNT = 5;
 
-function CustomCharacter({ pixels, setPixels }) {
-  function updatePixel(id, value) {
-    setPixels(pixels.map((pixel, pixelID) => (pixelID === id ? value : pixel)));
-  }
-
-  const grid = pixels.map((pixel, id) => (
-    <input
-      checked={pixels[id]}
-      key={id}
-      onChange={(e) => updatePixel(id, e.target.checked)}
-      type="checkbox"
-    />
-  ));
-
-  return <div className="custom-char">{grid}</div>;
+function CustomCharacter({ pixels, setPixel }) {
+  return (
+    <div className="custom-char">
+      {pixels.map((pixel, pixelID) => (
+        <input
+          checked={pixel}
+          key={pixelID}
+          onChange={(e) => setPixel(pixelID, e.target.checked)}
+          type="checkbox"
+        />
+      ))}
+    </div>
+  );
 }
 
 export default function App() {
@@ -32,9 +30,13 @@ export default function App() {
     );
   }
 
-  function updateCharacter(id, value) {
+  function updatePixel(charID, pixelID, value) {
     setCharacters((characters) =>
-      characters.map((c, cID) => (cID === id ? value : c)),
+      characters.map((char, id) =>
+        id === charID
+          ? char.map((pixel, id) => (id === pixelID ? value : pixel))
+          : char,
+      ),
     );
   }
 
@@ -42,11 +44,11 @@ export default function App() {
 
   return (
     <div className="custom-chars">
-      {characters.map((c, cID) => (
+      {characters.map((pixels, id) => (
         <CustomCharacter
-          key={cID}
-          pixels={c}
-          setPixels={(pixels) => updateCharacter(cID, pixels)}
+          key={id}
+          pixels={pixels}
+          setPixel={(row, col, pixel) => updatePixel(id, row, col, pixel)}
         />
       ))}
     </div>
