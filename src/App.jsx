@@ -1,50 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function CustomCharacter() {
-  const COLUMN_COUNT = 5;
-  const ROW_COUNT = 8;
+const CHARACTER_COUNT = 4;
+const ROW_COUNT = 8;
+const COLUMN_COUNT = 5;
 
-  const [pixels, setPixels] = useState(
-    Array(COLUMN_COUNT * ROW_COUNT).fill(false),
-  );
-
-  function updatePixel(e, id) {
-    setPixels((pixels) =>
-      pixels.map((pixel, pixelID) =>
-        pixelID === id ? e.target.checked : pixel,
-      ),
-    );
+function CustomCharacter({ pixels, setPixels }) {
+  function updatePixel(id, value) {
+    setPixels(pixels.map((pixel, pixelID) => (pixelID === id ? value : pixel)));
   }
 
-  const grid = [...Array(ROW_COUNT).keys()].map((key1) =>
-    [...Array(COLUMN_COUNT).keys()].map((key2) => {
-      const id = key1 * COLUMN_COUNT + key2;
-
-      return (
-        <input
-          checked={pixels[id]}
-          key={id}
-          onChange={(e) => updatePixel(e, id)}
-          type="checkbox"
-        />
-      );
-    }),
-  );
+  const grid = pixels.map((pixel, id) => (
+    <input
+      checked={pixels[id]}
+      key={id}
+      onChange={(e) => updatePixel(id, e.target.checked)}
+      type="checkbox"
+    />
+  ));
 
   return <div className="custom-char">{grid}</div>;
 }
 
 export default function App() {
+  const [characters, setCharacters] = useState([]);
+
+  function initializeCharacters() {
+    setCharacters(
+      [...Array(CHARACTER_COUNT)].map(() =>
+        Array(COLUMN_COUNT * ROW_COUNT).fill(false),
+      ),
+    );
+  }
+
+  function updateCharacter(id, value) {
+    setCharacters((characters) =>
+      characters.map((c, cID) => (cID === id ? value : c)),
+    );
+  }
+
+  useEffect(initializeCharacters, []);
+
   return (
     <div className="custom-chars">
-      <CustomCharacter />
-      <CustomCharacter />
-      <CustomCharacter />
-      <CustomCharacter />
-      <CustomCharacter />
-      <CustomCharacter />
-      <CustomCharacter />
-      <CustomCharacter />
+      {characters.map((c, cID) => (
+        <CustomCharacter
+          key={cID}
+          pixels={c}
+          setPixels={(pixels) => updateCharacter(cID, pixels)}
+        />
+      ))}
     </div>
   );
 }
