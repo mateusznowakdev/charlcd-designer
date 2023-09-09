@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function PixelGrid() {
+function CustomCharacter() {
   const COLUMN_COUNT = 5;
   const ROW_COUNT = 8;
 
@@ -30,9 +30,20 @@ function PixelGrid() {
     }),
   );
 
-  return <div className="pixel-grid">{grid}</div>;
+  return <div className="custom-char">{grid}</div>;
 }
 
 export default function App() {
-  return <PixelGrid />;
+  return (
+    <div className="custom-chars">
+      <CustomCharacter />
+      <CustomCharacter />
+      <CustomCharacter />
+      <CustomCharacter />
+      <CustomCharacter />
+      <CustomCharacter />
+      <CustomCharacter />
+      <CustomCharacter />
+    </div>
+  );
 }
