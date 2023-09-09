@@ -1,11 +1,11 @@
-import { useState } from "react";
+function PixelGrid() {
+  const grid = [...Array(7)].map(() =>
+    [...Array(5)].map(() => <input type="checkbox" />),
+  );
+
+  return <div className="pixel-grid">{grid}</div>;
+}
 
 export default function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <button onClick={() => setCount((count) => count + 1)}>
-      count is {count}
-    </button>
-  );
+  return <PixelGrid />;
 }
