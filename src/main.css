@@ -1,7 +1,22 @@
+@font-face {
+  font-family: "Source Sans";
+  font-display: swap;
+  src: url("fonts/SourceSans3VF-Upright.ttf.woff2");
+}
+
+@font-face {
+  font-family: "Source Sans";
+  font-style: italic;
+  font-display: swap;
+  src: url("fonts/SourceSans3VF-Italic.ttf.woff2");
+}
+
 body {
   background-color: #fff;
   color: #333;
-  font: 1rem sans-serif;
+  font:
+    1rem "Source Sans",
+    sans-serif;
 }
 
 .custom-characters {
