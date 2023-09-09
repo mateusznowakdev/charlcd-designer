@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const CHARACTER_COUNT = 4;
+const CHARACTER_COUNT = 8;
 const ROW_COUNT = 8;
 const COLUMN_COUNT = 5;
 
@@ -32,7 +32,9 @@ function CustomCharacterInput({ pixels, setPixel }) {
 function CustomCharacterCode({ pixels }) {
   return (
     <textarea
+      className="custom-character-code"
       readOnly
+      rows={ROW_COUNT}
       value={bitArrayToRowArrays(pixels).map(bitArrayToString).join(", ")}
     />
   );
@@ -40,7 +42,7 @@ function CustomCharacterCode({ pixels }) {
 
 function CustomCharacter({ pixels, setPixel }) {
   return (
-    <div>
+    <div className="custom-character">
       <CustomCharacterInput pixels={pixels} setPixel={setPixel} />
       <CustomCharacterCode pixels={pixels} />
     </div>

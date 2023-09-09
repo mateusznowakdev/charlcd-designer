@@ -1,14 +1,36 @@
-body {
-  font-family: sans-serif;
+body,
+textarea {
+  background-color: #fff;
+  color: #333;
+  font: 1rem sans-serif;
 }
 
 .custom-characters {
   display: flex;
   gap: 0.5rem;
+  justify-content: center;
+}
+
+.custom-character {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-character-code {
+  border: 0;
+  color: #aaa;
+  resize: none;
+  width: 75px;
 }
 
 .custom-character-input {
-  background-color: #eee;
-  display: inline-grid;
+  display: grid;
   grid-template-columns: repeat(5, 1fr);
+}
+
+.custom-character-input input {
+  border: 0;
+  margin: 1px;
+  padding: 0;
 }
