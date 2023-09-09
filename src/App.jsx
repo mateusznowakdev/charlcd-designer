@@ -4,6 +4,16 @@ const CHARACTER_COUNT = 4;
 const ROW_COUNT = 8;
 const COLUMN_COUNT = 5;
 
+function bitArrayToRowArrays(arr) {
+  return [...arr.keys()]
+    .filter((id) => id % COLUMN_COUNT === 0)
+    .map((id) => arr.slice(id, id + COLUMN_COUNT));
+}
+
+function bitArrayToString(arr) {
+  return "0b" + arr.map((value) => +value).join("");
+}
+
 function CustomCharacterInput({ pixels, setPixel }) {
   return (
     <div className="custom-character-input">
@@ -20,7 +30,12 @@ function CustomCharacterInput({ pixels, setPixel }) {
 }
 
 function CustomCharacterCode({ pixels }) {
-  return <textarea value={JSON.stringify(pixels)} />;
+  return (
+    <textarea
+      readOnly
+      value={bitArrayToRowArrays(pixels).map(bitArrayToString).join(", ")}
+    />
+  );
 }
 
 function CustomCharacter({ pixels, setPixel }) {
