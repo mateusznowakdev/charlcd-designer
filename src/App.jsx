@@ -9,10 +9,11 @@ function CustomCharacter() {
   );
 
   function updatePixel(e, id) {
-    setPixels((pixels) => {
-      pixels[id] = e.target.checked;
-      return [...pixels];
-    });
+    setPixels((pixels) =>
+      pixels.map((pixel, pixelID) =>
+        pixelID === id ? e.target.checked : pixel,
+      ),
+    );
   }
 
   const grid = [...Array(ROW_COUNT).keys()].map((key1) =>
