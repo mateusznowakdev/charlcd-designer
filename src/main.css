@@ -2,12 +2,12 @@ body {
   font-family: sans-serif;
 }
 
-.custom-chars {
+.custom-characters {
   display: flex;
   gap: 0.5rem;
 }
 
-.custom-char {
+.custom-character-input {
   background-color: #eee;
   display: inline-grid;
   grid-template-columns: repeat(5, 1fr);

@@ -4,9 +4,9 @@ const CHARACTER_COUNT = 4;
 const ROW_COUNT = 8;
 const COLUMN_COUNT = 5;
 
-function CustomCharacter({ pixels, setPixel }) {
+function CustomCharacterInput({ pixels, setPixel }) {
   return (
-    <div className="custom-char">
+    <div className="custom-character-input">
       {pixels.map((pixel, pixelID) => (
         <input
           checked={pixel}
@@ -15,6 +15,19 @@ function CustomCharacter({ pixels, setPixel }) {
           type="checkbox"
         />
       ))}
+    </div>
+  );
+}
+
+function CustomCharacterCode({ pixels }) {
+  return <textarea value={JSON.stringify(pixels)} />;
+}
+
+function CustomCharacter({ pixels, setPixel }) {
+  return (
+    <div>
+      <CustomCharacterInput pixels={pixels} setPixel={setPixel} />
+      <CustomCharacterCode pixels={pixels} />
     </div>
   );
 }
@@ -43,7 +56,7 @@ export default function App() {
   useEffect(initializeCharacters, []);
 
   return (
-    <div className="custom-chars">
+    <div className="custom-characters">
       {characters.map((pixels, id) => (
         <CustomCharacter
           key={id}
