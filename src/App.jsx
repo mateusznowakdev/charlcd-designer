@@ -31,12 +31,12 @@ function CustomCharacterInput({ pixels, setPixel }) {
 
 function CustomCharacterCode({ pixels }) {
   return (
-    <textarea
-      className="custom-character-code"
-      readOnly
-      rows={ROW_COUNT}
-      value={bitArrayToRowArrays(pixels).map(bitArrayToString).join(", ")}
-    />
+    <div className="custom-character-code">
+      {bitArrayToRowArrays(pixels)
+        .map(bitArrayToString)
+        .map((str) => str + ", ")
+        .join("")}
+    </div>
   );
 }
 

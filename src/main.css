@@ -1,5 +1,4 @@
-body,
-textarea {
+body {
   background-color: #fff;
   color: #333;
   font: 1rem sans-serif;
@@ -7,21 +6,23 @@ textarea {
 
 .custom-characters {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   justify-content: center;
+  margin: 0 auto;
+  width: 0;
 }
 
 .custom-character {
   align-items: center;
   display: flex;
+  gap: 0.5rem;
   flex-direction: column;
 }
 
 .custom-character-code {
   border: 0;
   color: #aaa;
-  resize: none;
-  width: 75px;
+  text-align: center;
 }
 
 .custom-character-input {
