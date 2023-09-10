@@ -209,6 +209,3 @@ export const CHARACTERS = CHARACTERS_RAW.map((raw) => {
 });
 
 export const CHAR_CUSTOM_COUNT = 8;
-
-export const CHAR_COUNT_H = 16;
-export const CHAR_COUNT_V = 2;

@@ -1,38 +1,34 @@
 import { useEffect } from "react";
 
-import {
-  CHAR_COUNT_H,
-  CHAR_COUNT_V,
-  CHAR_HEIGHT,
-  CHAR_WIDTH,
-} from "../characters.js";
+import { CHAR_HEIGHT, CHAR_WIDTH } from "../characters.js";
 
-export function Canvas({ characters, content }) {
-  const DISPLAY_WIDTH = (CHAR_WIDTH + 1) * CHAR_COUNT_H + 1;
-  const DISPLAY_HEIGHT = (CHAR_HEIGHT + 1) * CHAR_COUNT_V + 1;
+export function Canvas({ characters, content, height, width }) {
   const SCALE = 4;
 
   useEffect(() => {
     try {
-      content = eval('`' + content + '`');
+      content = eval("`" + content + "`");
     } catch {
       content = "Invalid text!";
     }
 
-    content = (content + "\n\n").split("\n");
+    content = content.split("\n");
+
+    const displayWidth = (CHAR_WIDTH + 1) * width + 1;
+    const displayHeight = (CHAR_HEIGHT + 1) * height + 1;
 
     const targetCanvas = document.getElementById("character-canvas");
-    targetCanvas.width = DISPLAY_WIDTH * SCALE;
-    targetCanvas.height = DISPLAY_HEIGHT * SCALE;
+    targetCanvas.width = displayWidth * SCALE;
+    targetCanvas.height = displayHeight * SCALE;
 
     const canvas = document.createElement("canvas");
-    canvas.width = DISPLAY_WIDTH;
-    canvas.height = DISPLAY_HEIGHT;
+    canvas.width = displayWidth;
+    canvas.height = displayHeight;
 
     const context = canvas.getContext("2d");
 
-    for (let y = 0; y < CHAR_COUNT_V; y++) {
-      for (let x = 0; x < CHAR_COUNT_H; x++) {
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
         const id = context.getImageData(
           x * (CHAR_WIDTH + 1) + 1,
           y * (CHAR_HEIGHT + 1) + 1,
@@ -40,7 +36,7 @@ export function Canvas({ characters, content }) {
           CHAR_HEIGHT,
         );
 
-        const chr = content[y][x] || " ";
+        const chr = (content[y] || [])[x] || " ";
         const chrCode = Math.min(chr.charCodeAt(0), characters.length - 1);
         const data = characters[chrCode];
 
@@ -68,7 +64,7 @@ export function Canvas({ characters, content }) {
       targetCanvas.width,
       targetCanvas.height,
     );
-  }, [characters, content]);
+  }, [characters, content, height, width]);
 
   return (
     <div>
