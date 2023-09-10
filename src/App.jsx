@@ -8,6 +8,7 @@ import { CHAR_CUSTOM_COUNT, CHARACTERS } from "./characters.js";
 
 export default function App() {
   const [characters, setCharacters] = useState(CHARACTERS);
+  const [content, setContent] = useState("");
 
   function updatePixel(charID, pixelID, value) {
     setCharacters((characters) =>
@@ -21,7 +22,15 @@ export default function App() {
 
   return (
     <>
-      <Canvas characters={characters} />
+      <Canvas characters={characters} content={content} />
+      <p>
+        Enter the text as if it was a JS string limited by backticks (
+        <code>``</code>):
+      </p>
+      <textarea
+        onChange={(e) => setContent(e.target.value)}
+        value={content}
+      ></textarea>
       <div className="custom-characters">
         {characters.slice(0, CHAR_CUSTOM_COUNT).map((pixels, id) => (
           <div className="custom-character" key={id}>

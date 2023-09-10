@@ -7,12 +7,20 @@ import {
   CHAR_WIDTH,
 } from "../characters.js";
 
-export function Canvas({ characters }) {
+export function Canvas({ characters, content }) {
   const DISPLAY_WIDTH = (CHAR_WIDTH + 1) * CHAR_COUNT_H + 1;
   const DISPLAY_HEIGHT = (CHAR_HEIGHT + 1) * CHAR_COUNT_V + 1;
   const SCALE = 4;
 
   useEffect(() => {
+    try {
+      content = eval('`' + content + '`');
+    } catch {
+      content = "Invalid text!";
+    }
+
+    content = (content + "\n\n").split("\n");
+
     const targetCanvas = document.getElementById("character-canvas");
     targetCanvas.width = DISPLAY_WIDTH * SCALE;
     targetCanvas.height = DISPLAY_HEIGHT * SCALE;
@@ -32,12 +40,14 @@ export function Canvas({ characters }) {
           CHAR_HEIGHT,
         );
 
-        const data = characters[0];
+        const chr = content[y][x] || " ";
+        const chrCode = Math.min(chr.charCodeAt(0), characters.length - 1);
+        const data = characters[chrCode];
 
         for (let i = 0; i < data.length; i++) {
-          id.data[i * 4] = data[i] ? 0 : 224;
-          id.data[i * 4 + 1] = data[i] ? 0 : 224;
-          id.data[i * 4 + 2] = data[i] ? 0 : 224;
+          id.data[i * 4] = data[i] ? 0 : 240;
+          id.data[i * 4 + 1] = data[i] ? 0 : 240;
+          id.data[i * 4 + 2] = data[i] ? 0 : 240;
           id.data[i * 4 + 3] = 255;
         }
 
@@ -58,7 +68,7 @@ export function Canvas({ characters }) {
       targetCanvas.width,
       targetCanvas.height,
     );
-  }, [characters]);
+  }, [characters, content]);
 
   return (
     <div>
