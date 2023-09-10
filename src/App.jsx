@@ -46,7 +46,7 @@ export default function App() {
         <input
           type="range"
           min={0}
-          max={20}
+          max={40}
           onChange={(e) => setWidth(+e.target.value)}
           value={width}
         />
@@ -57,13 +57,15 @@ export default function App() {
         <input
           type="range"
           min={0}
-          max={4}
+          max={8}
           onChange={(e) => setHeight(+e.target.value)}
           value={height}
         />
         {height}
       </p>
-      <p>Custom characters:</p>
+      <p>
+        Custom characters (<code>\x00</code> ... <code>\x07</code>):
+      </p>
       <div className="custom-characters">
         {characters.slice(0, CHAR_CUSTOM_COUNT).map((pixels, id) => (
           <div className="custom-character" key={id}>

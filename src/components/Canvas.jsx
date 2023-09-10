@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { CHAR_HEIGHT, CHAR_WIDTH } from "../characters.js";
 
 export function Canvas({ characters, content, height, width }) {
-  const SCALE = 4;
+  const SCALE = 3;
 
   useEffect(() => {
     try {
