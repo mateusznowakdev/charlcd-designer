@@ -20,7 +20,7 @@ function bitArrayToString(arr) {
   return "0b" + arr.map((value) => +value).join("");
 }
 
-function CharacterCanvas() {
+function CharacterCanvas({ characters }) {
   useEffect(() => {
     const canvas = document.getElementById("character-canvas");
 
@@ -29,48 +29,7 @@ function CharacterCanvas() {
 
     const context = canvas.getContext("2d");
 
-    const data = [
-      false,
-      true,
-      true,
-      true,
-      false,
-      true,
-      false,
-      false,
-      false,
-      true,
-      true,
-      false,
-      false,
-      false,
-      true,
-      true,
-      false,
-      false,
-      false,
-      true,
-      true,
-      true,
-      true,
-      true,
-      false,
-      true,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      false,
-      true,
-      false,
-      true,
-      false,
-      false,
-      false,
-      true,
-    ];
+    const data = characters[0];
 
     const secondCanvas = document.createElement("canvas");
     secondCanvas.width = 128;
@@ -104,7 +63,7 @@ function CharacterCanvas() {
 
     context.imageSmoothingEnabled = false;
     context.drawImage(secondCanvas, 0, 0, 512, 128);
-  }, []);
+  }, [characters]);
 
   return (
     <div>
@@ -163,7 +122,7 @@ export default function App() {
 
   return (
     <>
-      <CharacterCanvas />
+      <CharacterCanvas characters={characters} />
       <div className="custom-characters">
         {characters.slice(0, CHARACTER_CUSTOM_COUNT).map((pixels, id) => (
           <CustomCharacter
