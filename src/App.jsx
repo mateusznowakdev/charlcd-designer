@@ -21,8 +21,8 @@ function CharacterCanvas() {
   useEffect(() => {
     const canvas = document.getElementById("character-canvas");
 
-    canvas.width = 256;
-    canvas.height = 64;
+    canvas.width = 512;
+    canvas.height = 128;
 
     const context = canvas.getContext("2d");
 
@@ -69,9 +69,15 @@ function CharacterCanvas() {
       true,
     ];
 
+    const secondCanvas = document.createElement("canvas");
+    secondCanvas.width = 128;
+    secondCanvas.height = 32;
+
+    const sContext = secondCanvas.getContext("2d");
+
     for (let y = 0; y < CANVAS_CHARACTERS_V; y++) {
       for (let x = 0; x < CANVAS_CHARACTERS_H; x++) {
-        const id = context.getImageData(
+        const id = sContext.getImageData(
           x * (COLUMN_COUNT + 1),
           y * (ROW_COUNT + 1),
           COLUMN_COUNT,
@@ -85,9 +91,12 @@ function CharacterCanvas() {
           id.data[i * 4 + 3] = 255;
         }
 
-        context.putImageData(id, x * (COLUMN_COUNT + 1), y * (ROW_COUNT + 1));
+        sContext.putImageData(id, x * (COLUMN_COUNT + 1), y * (ROW_COUNT + 1));
       }
     }
+
+    context.imageSmoothingEnabled = false;
+    context.drawImage(secondCanvas, 0, 0, 512, 128);
   }, []);
 
   return (
