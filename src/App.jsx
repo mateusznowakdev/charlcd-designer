@@ -4,6 +4,9 @@ const CHARACTER_COUNT = 8;
 const ROW_COUNT = 8;
 const COLUMN_COUNT = 5;
 
+const CANVAS_CHARACTERS_H = 16;
+const CANVAS_CHARACTERS_V = 2;
+
 function bitArrayToRowArrays(arr) {
   return [...arr.keys()]
     .filter((id) => id % COLUMN_COUNT === 0)
@@ -22,8 +25,6 @@ function CharacterCanvas() {
     canvas.height = 64;
 
     const context = canvas.getContext("2d");
-
-    const id = context.getImageData(0, 0, COLUMN_COUNT, ROW_COUNT);
 
     const data = [
       false,
@@ -68,14 +69,25 @@ function CharacterCanvas() {
       true,
     ];
 
-    for (let i = 0; i < data.length; i++) {
-      id.data[i * 4] = data[i] ? 0 : 255;
-      id.data[i * 4 + 1] = data[i] ? 0 : 255;
-      id.data[i * 4 + 2] = data[i] ? 0 : 255;
-      id.data[i * 4 + 3] = 255;
-    }
+    for (let y = 0; y < CANVAS_CHARACTERS_V; y++) {
+      for (let x = 0; x < CANVAS_CHARACTERS_H; x++) {
+        const id = context.getImageData(
+          x * (COLUMN_COUNT + 1),
+          y * (ROW_COUNT + 1),
+          COLUMN_COUNT,
+          ROW_COUNT,
+        );
 
-    context.putImageData(id, 0, 0);
+        for (let i = 0; i < data.length; i++) {
+          id.data[i * 4] = data[i] ? 0 : 255;
+          id.data[i * 4 + 1] = data[i] ? 0 : 255;
+          id.data[i * 4 + 2] = data[i] ? 0 : 255;
+          id.data[i * 4 + 3] = 255;
+        }
+
+        context.putImageData(id, x * (COLUMN_COUNT + 1), y * (ROW_COUNT + 1));
+      }
+    }
   }, []);
 
   return (
