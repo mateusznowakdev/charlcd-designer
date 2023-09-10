@@ -194,13 +194,13 @@ const CHARACTERS_RAW = [
 CHARACTERS_RAW.splice(0, 0, ...Array(33).fill(0));
 CHARACTERS_RAW.splice(128, 0, ...Array(33).fill(0));
 
-export const CHARACTER_WIDTH = 5;
-export const CHARACTER_HEIGHT = 8;
+export const CHAR_WIDTH = 5;
+export const CHAR_HEIGHT = 8;
 
 export const CHARACTERS = CHARACTERS_RAW.map((raw) => {
   const bits = [];
 
-  for (let i = 0; i < CHARACTER_WIDTH * CHARACTER_HEIGHT; i++) {
+  for (let i = 0; i < CHAR_WIDTH * CHAR_HEIGHT; i++) {
     bits.push(raw % 2);
     raw = Math.floor(raw / 2);
   }
@@ -208,4 +208,7 @@ export const CHARACTERS = CHARACTERS_RAW.map((raw) => {
   return bits.reverse();
 });
 
-export const CHARACTER_CUSTOM_COUNT = 8;
+export const CHAR_CUSTOM_COUNT = 8;
+
+export const CHAR_COUNT_H = 16;
+export const CHAR_COUNT_V = 2;

@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 
 import {
-  CHARACTER_CUSTOM_COUNT,
-  CHARACTER_HEIGHT,
-  CHARACTER_WIDTH,
+  CHAR_COUNT_H,
+  CHAR_COUNT_V,
+  CHAR_CUSTOM_COUNT,
+  CHAR_HEIGHT,
+  CHAR_WIDTH,
   CHARACTERS,
 } from "./characters.js";
 
-const CANVAS_CHARACTERS_H = 16;
-const CANVAS_CHARACTERS_V = 2;
-
 function bitArrayToRowArrays(arr) {
   return [...arr.keys()]
-    .filter((id) => id % CHARACTER_WIDTH === 0)
-    .map((id) => arr.slice(id, id + CHARACTER_WIDTH));
+    .filter((id) => id % CHAR_WIDTH === 0)
+    .map((id) => arr.slice(id, id + CHAR_WIDTH));
 }
 
 function bitArrayToString(arr) {
@@ -21,48 +20,52 @@ function bitArrayToString(arr) {
 }
 
 function CharacterCanvas({ characters }) {
-  useEffect(() => {
-    const canvas = document.getElementById("character-canvas");
+  const DISPLAY_WIDTH = (CHAR_WIDTH + 1) * CHAR_COUNT_H + 1;
+  const DISPLAY_HEIGHT = (CHAR_HEIGHT + 1) * CHAR_COUNT_V + 1;
+  const SCALE = 4;
 
-    canvas.width = 512;
-    canvas.height = 128;
+  useEffect(() => {
+    const targetCanvas = document.getElementById("character-canvas");
+    targetCanvas.width = DISPLAY_WIDTH * SCALE;
+    targetCanvas.height = DISPLAY_HEIGHT * SCALE;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = DISPLAY_WIDTH;
+    canvas.height = DISPLAY_HEIGHT;
 
     const context = canvas.getContext("2d");
 
-    const data = characters[0];
-
-    const secondCanvas = document.createElement("canvas");
-    secondCanvas.width = 128;
-    secondCanvas.height = 32;
-
-    const sContext = secondCanvas.getContext("2d");
-
-    for (let y = 0; y < CANVAS_CHARACTERS_V; y++) {
-      for (let x = 0; x < CANVAS_CHARACTERS_H; x++) {
-        const id = sContext.getImageData(
-          x * (CHARACTER_WIDTH + 1),
-          y * (CHARACTER_HEIGHT + 1),
-          CHARACTER_WIDTH,
-          CHARACTER_HEIGHT,
+    for (let y = 0; y < CHAR_COUNT_V; y++) {
+      for (let x = 0; x < CHAR_COUNT_H; x++) {
+        const id = context.getImageData(
+          x * (CHAR_WIDTH + 1),
+          y * (CHAR_HEIGHT + 1),
+          CHAR_WIDTH,
+          CHAR_HEIGHT,
         );
 
+        const data = characters[0];
+
         for (let i = 0; i < data.length; i++) {
-          id.data[i * 4] = data[i] ? 0 : 255;
-          id.data[i * 4 + 1] = data[i] ? 0 : 255;
-          id.data[i * 4 + 2] = data[i] ? 0 : 255;
+          id.data[i * 4] = data[i] ? 0 : 224;
+          id.data[i * 4 + 1] = data[i] ? 0 : 224;
+          id.data[i * 4 + 2] = data[i] ? 0 : 224;
           id.data[i * 4 + 3] = 255;
         }
 
-        sContext.putImageData(
-          id,
-          x * (CHARACTER_WIDTH + 1),
-          y * (CHARACTER_HEIGHT + 1),
-        );
+        context.putImageData(id, x * (CHAR_WIDTH + 1), y * (CHAR_HEIGHT + 1));
       }
     }
 
-    context.imageSmoothingEnabled = false;
-    context.drawImage(secondCanvas, 0, 0, 512, 128);
+    const targetCanvasContext = targetCanvas.getContext("2d");
+    targetCanvasContext.imageSmoothingEnabled = false;
+    targetCanvasContext.drawImage(
+      canvas,
+      0,
+      0,
+      targetCanvas.width,
+      targetCanvas.height,
+    );
   }, [characters]);
 
   return (
@@ -124,7 +127,7 @@ export default function App() {
     <>
       <CharacterCanvas characters={characters} />
       <div className="custom-characters">
-        {characters.slice(0, CHARACTER_CUSTOM_COUNT).map((pixels, id) => (
+        {characters.slice(0, CHAR_CUSTOM_COUNT).map((pixels, id) => (
           <CustomCharacter
             key={id}
             pixels={pixels}
