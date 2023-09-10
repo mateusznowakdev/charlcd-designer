@@ -2,7 +2,14 @@ import { useEffect } from "react";
 
 import { CHAR_HEIGHT, CHAR_WIDTH } from "../characters.js";
 
-export function Canvas({ characters, content, height, width }) {
+export function Canvas({
+  characters,
+  content,
+  cursorX,
+  cursorY,
+  height,
+  width,
+}) {
   const SCALE = 3;
 
   useEffect(() => {
@@ -38,7 +45,15 @@ export function Canvas({ characters, content, height, width }) {
 
         const chr = (content[y] || [])[x] || " ";
         const chrCode = Math.min(chr.charCodeAt(0), characters.length - 1);
-        const data = characters[chrCode];
+
+        const data = [...characters[chrCode]];
+        if (x === cursorX && y === cursorY) {
+          data.splice(
+            CHAR_WIDTH * (CHAR_HEIGHT - 1),
+            CHAR_WIDTH,
+            ...Array(CHAR_WIDTH).fill(1),
+          );
+        }
 
         for (let i = 0; i < data.length; i++) {
           id.data[i * 4] = data[i] ? 0 : 240;
@@ -64,7 +79,7 @@ export function Canvas({ characters, content, height, width }) {
       targetCanvas.width,
       targetCanvas.height,
     );
-  }, [characters, content, height, width]);
+  }, [characters, content, cursorX, cursorY, height, width]);
 
   return (
     <div>
