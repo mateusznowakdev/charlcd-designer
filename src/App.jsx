@@ -38,8 +38,8 @@ function CharacterCanvas({ characters }) {
     for (let y = 0; y < CHAR_COUNT_V; y++) {
       for (let x = 0; x < CHAR_COUNT_H; x++) {
         const id = context.getImageData(
-          x * (CHAR_WIDTH + 1),
-          y * (CHAR_HEIGHT + 1),
+          x * (CHAR_WIDTH + 1) + 1,
+          y * (CHAR_HEIGHT + 1) + 1,
           CHAR_WIDTH,
           CHAR_HEIGHT,
         );
@@ -53,7 +53,11 @@ function CharacterCanvas({ characters }) {
           id.data[i * 4 + 3] = 255;
         }
 
-        context.putImageData(id, x * (CHAR_WIDTH + 1), y * (CHAR_HEIGHT + 1));
+        context.putImageData(
+          id,
+          x * (CHAR_WIDTH + 1) + 1,
+          y * (CHAR_HEIGHT + 1) + 1,
+        );
       }
     }
 
