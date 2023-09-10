@@ -14,6 +14,77 @@ function bitArrayToString(arr) {
   return "0b" + arr.map((value) => +value).join("");
 }
 
+function CharacterCanvas() {
+  useEffect(() => {
+    const canvas = document.getElementById("character-canvas");
+
+    canvas.width = 256;
+    canvas.height = 64;
+
+    const context = canvas.getContext("2d");
+
+    const id = context.getImageData(0, 0, COLUMN_COUNT, ROW_COUNT);
+
+    const data = [
+      false,
+      true,
+      true,
+      true,
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+    ];
+
+    for (let i = 0; i < data.length; i++) {
+      id.data[i * 4] = data[i] ? 0 : 255;
+      id.data[i * 4 + 1] = data[i] ? 0 : 255;
+      id.data[i * 4 + 2] = data[i] ? 0 : 255;
+      id.data[i * 4 + 3] = 255;
+    }
+
+    context.putImageData(id, 0, 0);
+  }, []);
+
+  return (
+    <div>
+      <canvas id="character-canvas"></canvas>
+    </div>
+  );
+}
+
 function CustomCharacterInput({ pixels, setPixel }) {
   return (
     <div className="custom-character-input">
@@ -73,14 +144,17 @@ export default function App() {
   useEffect(initializeCharacters, []);
 
   return (
-    <div className="custom-characters">
-      {characters.map((pixels, id) => (
-        <CustomCharacter
-          key={id}
-          pixels={pixels}
-          setPixel={(row, col, pixel) => updatePixel(id, row, col, pixel)}
-        />
-      ))}
-    </div>
+    <>
+      <CharacterCanvas />
+      <div className="custom-characters">
+        {characters.map((pixels, id) => (
+          <CustomCharacter
+            key={id}
+            pixels={pixels}
+            setPixel={(row, col, pixel) => updatePixel(id, row, col, pixel)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
