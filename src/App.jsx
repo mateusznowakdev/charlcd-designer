@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 
+import { CHARACTER_HEIGHT, CHARACTER_WIDTH } from "./CHARACTERS.js";
+
 const CHARACTER_COUNT = 8;
-const ROW_COUNT = 8;
-const COLUMN_COUNT = 5;
 
 const CANVAS_CHARACTERS_H = 16;
 const CANVAS_CHARACTERS_V = 2;
 
 function bitArrayToRowArrays(arr) {
   return [...arr.keys()]
-    .filter((id) => id % COLUMN_COUNT === 0)
-    .map((id) => arr.slice(id, id + COLUMN_COUNT));
+    .filter((id) => id % CHARACTER_WIDTH === 0)
+    .map((id) => arr.slice(id, id + CHARACTER_WIDTH));
 }
 
 function bitArrayToString(arr) {
@@ -78,10 +78,10 @@ function CharacterCanvas() {
     for (let y = 0; y < CANVAS_CHARACTERS_V; y++) {
       for (let x = 0; x < CANVAS_CHARACTERS_H; x++) {
         const id = sContext.getImageData(
-          x * (COLUMN_COUNT + 1),
-          y * (ROW_COUNT + 1),
-          COLUMN_COUNT,
-          ROW_COUNT,
+          x * (CHARACTER_WIDTH + 1),
+          y * (CHARACTER_HEIGHT + 1),
+          CHARACTER_WIDTH,
+          CHARACTER_HEIGHT,
         );
 
         for (let i = 0; i < data.length; i++) {
@@ -91,7 +91,11 @@ function CharacterCanvas() {
           id.data[i * 4 + 3] = 255;
         }
 
-        sContext.putImageData(id, x * (COLUMN_COUNT + 1), y * (ROW_COUNT + 1));
+        sContext.putImageData(
+          id,
+          x * (CHARACTER_WIDTH + 1),
+          y * (CHARACTER_HEIGHT + 1),
+        );
       }
     }
 
@@ -147,7 +151,7 @@ export default function App() {
   function initializeCharacters() {
     setCharacters(
       [...Array(CHARACTER_COUNT)].map(() =>
-        Array(COLUMN_COUNT * ROW_COUNT).fill(false),
+        Array(CHARACTER_WIDTH * CHARACTER_HEIGHT).fill(false),
       ),
     );
   }
