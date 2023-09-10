@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { CHARACTER_HEIGHT, CHARACTER_WIDTH } from "./CHARACTERS.js";
-
-const CHARACTER_COUNT = 8;
+import {
+  CHARACTER_CUSTOM_COUNT,
+  CHARACTER_HEIGHT,
+  CHARACTER_WIDTH,
+  CHARACTERS,
+} from "./characters.js";
 
 const CANVAS_CHARACTERS_H = 16;
 const CANVAS_CHARACTERS_V = 2;
@@ -146,15 +149,7 @@ function CustomCharacter({ pixels, setPixel }) {
 }
 
 export default function App() {
-  const [characters, setCharacters] = useState([]);
-
-  function initializeCharacters() {
-    setCharacters(
-      [...Array(CHARACTER_COUNT)].map(() =>
-        Array(CHARACTER_WIDTH * CHARACTER_HEIGHT).fill(false),
-      ),
-    );
-  }
+  const [characters, setCharacters] = useState(CHARACTERS);
 
   function updatePixel(charID, pixelID, value) {
     setCharacters((characters) =>
@@ -166,13 +161,11 @@ export default function App() {
     );
   }
 
-  useEffect(initializeCharacters, []);
-
   return (
     <>
       <CharacterCanvas />
       <div className="custom-characters">
-        {characters.map((pixels, id) => (
+        {characters.slice(0, CHARACTER_CUSTOM_COUNT).map((pixels, id) => (
           <CustomCharacter
             key={id}
             pixels={pixels}

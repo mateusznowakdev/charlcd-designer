@@ -196,3 +196,16 @@ CHARACTERS_RAW.splice(128, 0, ...Array(33).fill(0));
 
 export const CHARACTER_WIDTH = 5;
 export const CHARACTER_HEIGHT = 8;
+
+export const CHARACTERS = CHARACTERS_RAW.map((raw) => {
+  const bits = [];
+
+  for (let i = 0; i < CHARACTER_WIDTH * CHARACTER_HEIGHT; i++) {
+    bits.push(raw % 2);
+    raw = Math.floor(raw / 2);
+  }
+
+  return bits.reverse();
+});
+
+export const CHARACTER_CUSTOM_COUNT = 8;
