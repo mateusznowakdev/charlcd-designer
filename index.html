@@ -10,8 +10,44 @@
       <h1>Character LCD Designer</h1>
     </header>
     <main class="container-fluid my-4">
+      <hr />
       <div id="root"></div>
+      <hr />
+      <h2>What is this?</h2>
+      <p>
+        I use HD44780 character displays in my projects, both I2C and parallel.
+        Unfortunately, I couldn't find any online tool that would allow me to
+        create custom characters AND test them in a sequence at the same time. I
+        could use spare Raspberry Pi or Arduino, but it would require me to have
+        some free space on my desk, connect all the wires including pull-up
+        resistors, and upload new program every single time.
+      </p>
+      <p>
+        This web application implements Hitachi HD44780 character map (ROM Code
+        A00 - ASCII, Japanese, European characters, math symbols). It is
+        possible to change data for first 8 characters and get their binary
+        representation, compatible with <code>createChar()</code> function. The
+        text you enter must be a valid JavaScript multiline string, so it can be
+        copied over to your own script with little to no changes, regardless of
+        programming language you use. It is also possible to change display size
+        and move cursor around.
+      </p>
+      <h2>Source Code</h2>
+      <p>
+        Source code of this utility is available on
+        <a
+          href="https://github.com/mateusznowakdev/charlcd-designer"
+          target="_blank"
+          >the GitHub repo</a
+        >.
+      </p>
+      <p>
+        You can find my other projects on
+        <a href="https://mateusznowak.dev" target="_blank">my home page</a>.
+      </p>
+      <hr />
     </main>
+    <footer class="container-fluid my-4">&copy; 2023 Mateusz Nowak</footer>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
