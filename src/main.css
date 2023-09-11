@@ -1,3 +1,20 @@
+@font-face {
+  font-family: "Source Sans";
+  font-display: swap;
+  src: url("fonts/SourceSans3VF-Upright.ttf.woff2");
+}
+
+@font-face {
+  font-family: "Source Sans";
+  font-style: italic;
+  font-display: swap;
+  src: url("fonts/SourceSans3VF-Italic.ttf.woff2");
+}
+
+body {
+  font-family: "Source Sans", sans-serif;
+}
+
 h1 {
   font-size: 1.5rem;
   font-weight: 400;

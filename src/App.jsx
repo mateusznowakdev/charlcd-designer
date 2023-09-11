@@ -49,10 +49,10 @@ export default function App() {
       />
       <Form>
         <FormGroup as={Row} className="mb-3">
-          <Col xs={3}>
+          <Col xs={2}>
             Size ({width} x {height})
           </Col>
-          <Col xs={6}>
+          <Col xs={8}>
             <FormRange
               min={0}
               max={MAX_WIDTH}
@@ -60,7 +60,7 @@ export default function App() {
               value={width}
             />
           </Col>
-          <Col xs={3}>
+          <Col xs={2}>
             <FormRange
               min={0}
               max={MAX_HEIGHT}
@@ -70,10 +70,10 @@ export default function App() {
           </Col>
         </FormGroup>
         <FormGroup as={Row} className="mb-3">
-          <Col xs={3}>
+          <Col xs={2}>
             Cursor ({cursorX}, {cursorY})
           </Col>
-          <Col xs={6}>
+          <Col xs={8}>
             <FormRange
               min={0}
               max={MAX_WIDTH}
@@ -81,7 +81,7 @@ export default function App() {
               value={cursorX}
             />
           </Col>
-          <Col xs={3}>
+          <Col xs={2}>
             <FormRange
               min={0}
               max={MAX_HEIGHT}
