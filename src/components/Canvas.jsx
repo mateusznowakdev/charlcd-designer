@@ -82,7 +82,7 @@ export function Canvas({
   }, [characters, content, cursorX, cursorY, height, width]);
 
   return (
-    <div className="canvas-wrapper">
+    <div className="canvas-wrapper mb-4">
       <canvas></canvas>
     </div>
   );

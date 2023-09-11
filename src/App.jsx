@@ -1,18 +1,21 @@
 import { useState } from "react";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
+import FormGroup from "react-bootstrap/FormGroup";
+import FormRange from "react-bootstrap/FormRange";
+import Row from "react-bootstrap/Row";
 
 import { Canvas } from "./components/Canvas.jsx";
-import { CharacterInput } from "./components/CharacterInput.jsx";
 import { CharacterCode } from "./components/CharacterCode.jsx";
+import { CharacterInput } from "./components/CharacterInput.jsx";
 
 import { CHAR_CUSTOM_COUNT, CHARACTERS } from "./characters.js";
 
 export default function App() {
-  const MIN_WIDTH = 1;
   const DEFAULT_WIDTH = 16;
   const MAX_WIDTH = 40;
 
-  const MIN_HEIGHT = 1;
   const DEFAULT_HEIGHT = 2;
   const MAX_HEIGHT = 8;
 
@@ -44,50 +47,50 @@ export default function App() {
         height={height}
         width={width}
       />
-      <p>
-        Width:
-        <input
-          min={MIN_WIDTH}
-          max={MAX_WIDTH}
-          onChange={(e) => setWidth(+e.target.value)}
-          type="range"
-          value={width}
-        />
-        {width}
-      </p>
-      <p>
-        Height:
-        <input
-          min={MIN_HEIGHT}
-          max={MAX_HEIGHT}
-          onChange={(e) => setHeight(+e.target.value)}
-          type="range"
-          value={height}
-        />
-        {height}
-      </p>
-      <p>
-        Cursor X position:
-        <input
-          min={0}
-          max={MAX_WIDTH}
-          onChange={(e) => setCursorX(+e.target.value)}
-          type="range"
-          value={cursorX}
-        />
-        {cursorX}
-      </p>
-      <p>
-        Cursor Y position:
-        <input
-          min={0}
-          max={MAX_HEIGHT}
-          onChange={(e) => setCursorY(+e.target.value)}
-          type="range"
-          value={cursorY}
-        />
-        {cursorY}
-      </p>
+      <Form>
+        <FormGroup as={Row} className="mb-3">
+          <Col xs={3}>
+            Size ({width} x {height})
+          </Col>
+          <Col xs={6}>
+            <FormRange
+              min={0}
+              max={MAX_WIDTH}
+              onChange={(e) => setWidth(+e.target.value)}
+              value={width}
+            />
+          </Col>
+          <Col xs={3}>
+            <FormRange
+              min={0}
+              max={MAX_HEIGHT}
+              onChange={(e) => setHeight(+e.target.value)}
+              value={height}
+            />
+          </Col>
+        </FormGroup>
+        <FormGroup as={Row} className="mb-3">
+          <Col xs={3}>
+            Cursor ({cursorX}, {cursorY})
+          </Col>
+          <Col xs={6}>
+            <FormRange
+              min={0}
+              max={MAX_WIDTH}
+              onChange={(e) => setCursorX(+e.target.value)}
+              value={cursorX}
+            />
+          </Col>
+          <Col xs={3}>
+            <FormRange
+              min={0}
+              max={MAX_HEIGHT}
+              onChange={(e) => setCursorY(+e.target.value)}
+              value={cursorY}
+            />
+          </Col>
+        </FormGroup>
+      </Form>
       <p>
         Text, as if it was a JS string limited by backticks (<code>``</code>):
       </p>

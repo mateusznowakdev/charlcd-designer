@@ -5,7 +5,6 @@
 .canvas-wrapper {
   display: flex;
   justify-content: center;
-  margin: 1rem auto;
 }
 
 .custom-characters {
