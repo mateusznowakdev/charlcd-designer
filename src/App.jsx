@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FormControl from "react-bootstrap/FormControl";
 
 import { Canvas } from "./components/Canvas.jsx";
 import { CharacterInput } from "./components/CharacterInput.jsx";
@@ -44,16 +45,6 @@ export default function App() {
         width={width}
       />
       <p>
-        Enter the text as if it was a JS string limited by backticks (
-        <code>``</code>):
-      </p>
-      <textarea
-        cols={MAX_WIDTH}
-        onChange={(e) => setContent(e.target.value)}
-        rows={MAX_HEIGHT}
-        value={content}
-      ></textarea>
-      <p>
         Width:
         <input
           min={MIN_WIDTH}
@@ -97,6 +88,17 @@ export default function App() {
         />
         {cursorY}
       </p>
+      <p>
+        Text, as if it was a JS string limited by backticks (<code>``</code>):
+      </p>
+      <FormControl
+        as="textarea"
+        className="my-3"
+        cols={MAX_WIDTH}
+        onChange={(e) => setContent(e.target.value)}
+        rows={MAX_HEIGHT}
+        value={content}
+      ></FormControl>
       <p>
         Custom characters (<code>\x00</code> ... <code>\x07</code>):
       </p>

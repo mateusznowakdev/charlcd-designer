@@ -12,7 +12,7 @@ function bitArrayToString(arr) {
 
 export function CharacterCode({ pixels }) {
   return (
-    <div className="custom-character-code">
+    <div className="opacity-50 text-center">
       {bitArrayToRowArrays(pixels)
         .map(bitArrayToString)
         .map((str) => str + ", ")

@@ -24,7 +24,7 @@ export function Canvas({
     const displayWidth = (CHAR_WIDTH + 1) * width + 1;
     const displayHeight = (CHAR_HEIGHT + 1) * height + 1;
 
-    const targetCanvas = document.getElementById("character-canvas");
+    const targetCanvas = document.getElementsByTagName("canvas")[0];
     targetCanvas.width = displayWidth * SCALE;
     targetCanvas.height = displayHeight * SCALE;
 
@@ -82,8 +82,8 @@ export function Canvas({
   }, [characters, content, cursorX, cursorY, height, width]);
 
   return (
-    <div>
-      <canvas id="character-canvas"></canvas>
+    <div className="canvas-wrapper">
+      <canvas></canvas>
     </div>
   );
 }
