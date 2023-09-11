@@ -56,9 +56,9 @@ export function Canvas({
         }
 
         for (let i = 0; i < data.length; i++) {
-          id.data[i * 4] = data[i] ? 0 : 240;
-          id.data[i * 4 + 1] = data[i] ? 0 : 240;
-          id.data[i * 4 + 2] = data[i] ? 0 : 240;
+          id.data[i * 4] = data[i] ? 0 : 247;
+          id.data[i * 4 + 1] = data[i] ? 0 : 247;
+          id.data[i * 4 + 2] = data[i] ? 0 : 247;
           id.data[i * 4 + 3] = 255;
         }
 
