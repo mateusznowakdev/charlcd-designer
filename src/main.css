@@ -19,6 +19,11 @@ a.home::before {
   content: "← ";
 }
 
+a.top::before {
+  content: "↑ ";
+  padding-left: 1rem;
+}
+
 body {
   font-family: "Source Sans", sans-serif;
 }

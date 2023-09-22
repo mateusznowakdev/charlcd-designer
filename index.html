@@ -1,19 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta
       name="description"
       content="Create custom characters for HD44780 and test live in a sequence on a freely resizable canvas"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Character LCD Designer</title>
+    <title>Character LCD Designer &mdash; Mateusz Nowak</title>
   </head>
   <body>
     <header class="container-fluid my-4">
-      <a class="home" href="https://mateusznowak.dev" target="_blank"
-        >Back to Home Page</a
-      >
+      <a class="home" href="https://mateusznowak.dev">Back to Home Page</a>
       <h1>Character LCD Designer</h1>
     </header>
     <main class="container-fluid my-4">
@@ -22,39 +20,44 @@
       <hr />
       <h2>What is this?</h2>
       <p>
-        I use HD44780 character displays in my projects, both I2C and parallel.
-        Unfortunately, I couldn't find any online tool that would allow me to
-        create custom characters AND test them in a sequence at the same time. I
-        could use spare Raspberry Pi or Arduino, but it would require me to have
-        some free space on my desk, connect all the wires including pull-up
-        resistors, and upload new program every single time.
+        I&nbsp;use HD44780 character displays in my projects, both I2C and
+        parallel. Unfortunately, I&nbsp;couldn't find any online tool that would
+        allow me to create custom characters AND test them in a&nbsp;sequence at
+        the same time. I&nbsp; could use a&nbsp;spare Raspberry Pi or Arduino,
+        but it would require me to have some free space on my desk, connect all
+        the wires, including pull-up resistors, and upload a&nbsp;new program
+        every single time.
       </p>
       <p>
-        This web application implements Hitachi HD44780 character map (ROM Code
-        A00 - ASCII, Japanese, European characters, math symbols). It is
-        possible to change data for first 8 characters and get their binary
-        representation, compatible with <code>createChar()</code> function. The
-        text you enter must be a valid JavaScript multiline string, so it can be
-        copied over to your own script with little to no changes, regardless of
-        programming language you use. It is also possible to change display size
-        and move cursor around.
+        This web application implements the Hitachi HD44780 character map (ROM
+        Code A00: ASCII, Japanese, European characters, math symbols). It is
+        possible to change the memory data for the first 8&nbsp;characters and
+        get their binary representation, compatible with
+        <code>createChar()</code> function. The text you enter must be
+        a&nbsp;valid JavaScript multiline string, so it can be copied over to
+        your own script with little to no changes, regardless of the programming
+        language you use. It is also possible to change the display size and
+        move the cursor around.
       </p>
       <h2>Source Code</h2>
       <p>
-        Source code of this utility is available on
+        The source code is available on
         <a
           href="https://github.com/mateusznowakdev/charlcd-designer"
+          rel="noopener"
           target="_blank"
           >the GitHub repo</a
         >.
       </p>
       <p>
         You can find my other projects on
-        <a href="https://mateusznowak.dev" target="_blank">my home page</a>.
+        <a href="https://mateusznowak.dev">my home page</a>.
       </p>
       <hr />
     </main>
-    <footer class="container-fluid my-4">&copy; 2023 Mateusz Nowak</footer>
+    <footer class="container-fluid my-4">
+      &copy; 2023 Mateusz Nowak <a class="top" href="#">To the top</a>
+    </footer>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
