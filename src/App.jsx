@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
@@ -10,7 +11,11 @@ import { Canvas } from "./components/Canvas.jsx";
 import { CharacterCode } from "./components/CharacterCode.jsx";
 import { CharacterInput } from "./components/CharacterInput.jsx";
 
-import { CHAR_CUSTOM_COUNT, CHARACTERS } from "./characters.js";
+import {
+  CHAR_CUSTOM_COUNT,
+  CHARACTERS,
+  getBlankCharacter,
+} from "./characters.js";
 
 export default function App() {
   const DEFAULT_WIDTH = 16;
@@ -26,6 +31,14 @@ export default function App() {
   const [content, setContent] = useState("");
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
+
+  function resetCharacter(charID) {
+    setCharacters((characters) =>
+      characters.map((char, id) =>
+        id === charID ? getBlankCharacter() : char,
+      ),
+    );
+  }
 
   function updatePixel(charID, pixelID, value) {
     setCharacters((characters) =>
@@ -112,6 +125,13 @@ export default function App() {
               pixels={pixels}
               setPixel={(row, col, pixel) => updatePixel(id, row, col, pixel)}
             />
+            <Button
+              onClick={() => resetCharacter(id)}
+              size="sm"
+              variant="light"
+            >
+              Reset
+            </Button>
             <CharacterCode pixels={pixels} />
           </div>
         ))}

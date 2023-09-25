@@ -209,3 +209,7 @@ export const CHARACTERS = CHARACTERS_RAW.map((raw) => {
 });
 
 export const CHAR_CUSTOM_COUNT = 8;
+
+export function getBlankCharacter() {
+  return new Array(CHAR_WIDTH * CHAR_HEIGHT).fill(0);
+}
