@@ -105,7 +105,18 @@ export default function App() {
         </FormGroup>
       </Form>
       <p>
-        Text, as if it was a JS string limited by backticks (<code>``</code>):
+        Text, as if it were a JS string limited by <code>``</code> backticks
+        <br />
+        <i className="opacity-50">
+          You can enter any character as a&nbsp;hex value <code>\x00</code> to{" "}
+          <code>\xff</code>. Some symbols may look different, see the LCD docs.
+        </i>
+        <br />
+        <i className="opacity-50">
+          Standalone backticks <code>`</code> and backslashes <code>\</code>{" "}
+          must be escaped. Further adaptation for C&nbsp;and Python code is
+          required.
+        </i>
       </p>
       <FormControl
         as="textarea"
@@ -116,7 +127,17 @@ export default function App() {
         value={content}
       ></FormControl>
       <p>
-        Custom characters (<code>\x00</code> ... <code>\x07</code>):
+        Custom characters
+        <br />
+        <i className="opacity-50">
+          Using the Arduino IDE? C&nbsp;strings are null-terminated and will be
+          truncated when <code>\x00</code> is present in a&nbsp;string.
+        </i>
+        <br />
+        <i className="opacity-50">
+          Skip it, try <code>\x08</code> instead, or send a&nbsp;single byte
+          directly.
+        </i>
       </p>
       <div className="custom-characters">
         {characters.slice(0, CHAR_CUSTOM_COUNT).map((pixels, id) => (
