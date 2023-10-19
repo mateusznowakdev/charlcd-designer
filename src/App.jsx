@@ -35,15 +35,15 @@ export default function App() {
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
 
+  function compareCharID(actual, expected) {
+    return actual === expected || actual === expected + CHAR_CUSTOM_COUNT;
+  }
+
   function resetCharacter(charID) {
     setCharacters((characters) =>
-      characters.map((char, id) => {
-        if (id === charID || id === charID + CHAR_CUSTOM_COUNT) {
-          return getBlankCharacter();
-        } else {
-          return char;
-        }
-      }),
+      characters.map((char, id) =>
+        compareCharID(id, charID) ? getBlankCharacter() : char,
+      ),
     );
   }
 
@@ -52,26 +52,20 @@ export default function App() {
 
     setCharacters((characters) =>
       characters.map((char, id) => {
-        if (id === leftID || id === leftID + CHAR_CUSTOM_COUNT) {
-          return characters[rightID];
-        } else if (id === rightID || id === rightID + CHAR_CUSTOM_COUNT) {
-          return characters[leftID];
-        } else {
-          return char;
-        }
+        if (compareCharID(id, leftID)) return characters[rightID];
+        else if (compareCharID(id, rightID)) return characters[leftID];
+        else return char;
       }),
     );
   }
 
   function updatePixel(charID, pixelID, value) {
     setCharacters((characters) =>
-      characters.map((char, id) => {
-        if (id === charID || id === charID + CHAR_CUSTOM_COUNT) {
-          return char.map((pixel, id) => (id === pixelID ? value : pixel));
-        } else {
-          return char;
-        }
-      }),
+      characters.map((char, id) =>
+        compareCharID(id, charID)
+          ? char.map((pixel, id) => (id === pixelID ? value : pixel))
+          : char,
+      ),
     );
   }
 
