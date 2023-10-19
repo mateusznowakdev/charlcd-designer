@@ -47,6 +47,10 @@ h2 {
   margin: 1rem 0;
 }
 
+.btn {
+  display: flex;
+}
+
 .container-fluid {
   width: 768px;
 }

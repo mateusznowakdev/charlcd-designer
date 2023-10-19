@@ -1,5 +1,8 @@
+import ArrowRightLeft from "lucide-react/dist/esm/icons/arrow-right-left";
+import X from "lucide-react/dist/esm/icons/x";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
@@ -37,6 +40,22 @@ export default function App() {
       characters.map((char, id) => {
         if (id === charID || id === charID + CHAR_CUSTOM_COUNT) {
           return getBlankCharacter();
+        } else {
+          return char;
+        }
+      }),
+    );
+  }
+
+  function swapCharacter(leftID) {
+    const rightID = leftID + 1 < CHAR_CUSTOM_COUNT ? leftID + 1 : 0;
+
+    setCharacters((characters) =>
+      characters.map((char, id) => {
+        if (id === leftID || id === leftID + CHAR_CUSTOM_COUNT) {
+          return characters[rightID];
+        } else if (id === rightID || id === rightID + CHAR_CUSTOM_COUNT) {
+          return characters[leftID];
         } else {
           return char;
         }
@@ -129,7 +148,7 @@ export default function App() {
         className="my-3"
         cols={MAX_WIDTH}
         onChange={(e) => setContent(e.target.value)}
-        rows={MAX_HEIGHT}
+        rows={MAX_HEIGHT / 2}
         value={content}
       ></FormControl>
       <p>
@@ -152,13 +171,24 @@ export default function App() {
               pixels={pixels}
               setPixel={(row, col, pixel) => updatePixel(id, row, col, pixel)}
             />
-            <Button
-              onClick={() => resetCharacter(id)}
-              size="sm"
-              variant="light"
-            >
-              Reset
-            </Button>
+            <ButtonToolbar className="gap-1">
+              <Button
+                onClick={() => resetCharacter(id)}
+                size="sm"
+                title="Reset"
+                variant="light"
+              >
+                <X size={16} />
+              </Button>
+              <Button
+                onClick={() => swapCharacter(id)}
+                size="sm"
+                title="Swap with the next character"
+                variant="light"
+              >
+                <ArrowRightLeft size={16} />
+              </Button>
+            </ButtonToolbar>
             <CharacterCode pixels={pixels} />
           </div>
         ))}
