@@ -34,19 +34,25 @@ export default function App() {
 
   function resetCharacter(charID) {
     setCharacters((characters) =>
-      characters.map((char, id) =>
-        id === charID ? getBlankCharacter() : char,
-      ),
+      characters.map((char, id) => {
+        if (id === charID || id === charID + CHAR_CUSTOM_COUNT) {
+          return getBlankCharacter();
+        } else {
+          return char;
+        }
+      }),
     );
   }
 
   function updatePixel(charID, pixelID, value) {
     setCharacters((characters) =>
-      characters.map((char, id) =>
-        id === charID
-          ? char.map((pixel, id) => (id === pixelID ? value : pixel))
-          : char,
-      ),
+      characters.map((char, id) => {
+        if (id === charID || id === charID + CHAR_CUSTOM_COUNT) {
+          return char.map((pixel, id) => (id === pixelID ? value : pixel));
+        } else {
+          return char;
+        }
+      }),
     );
   }
 
