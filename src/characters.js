@@ -197,7 +197,15 @@ CHARACTERS_RAW.splice(128, 0, ...Array(33).fill(0));
 export const CHAR_WIDTH = 5;
 export const CHAR_HEIGHT = 8;
 
-export const CHARACTERS = CHARACTERS_RAW.map((raw) => {
+export const CHARACTERS = CHARACTERS_RAW.map(importCharacter);
+
+export const CHAR_CUSTOM_COUNT = 8;
+
+export function getBlankCharacter() {
+  return new Array(CHAR_WIDTH * CHAR_HEIGHT).fill(0);
+}
+
+export function importCharacter(raw) {
   const bits = [];
 
   for (let i = 0; i < CHAR_WIDTH * CHAR_HEIGHT; i++) {
@@ -205,11 +213,5 @@ export const CHARACTERS = CHARACTERS_RAW.map((raw) => {
     raw = Math.floor(raw / 2);
   }
 
-  return bits.reverse();
-});
-
-export const CHAR_CUSTOM_COUNT = 8;
-
-export function getBlankCharacter() {
-  return new Array(CHAR_WIDTH * CHAR_HEIGHT).fill(0);
+  return bits.reverse().slice(0, CHAR_WIDTH * CHAR_HEIGHT);
 }
