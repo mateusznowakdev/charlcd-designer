@@ -8,6 +8,9 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import FormGroup from "react-bootstrap/FormGroup";
 import FormRange from "react-bootstrap/FormRange";
+import Modal from "react-bootstrap/Modal";
+import ModalBody from "react-bootstrap/ModalBody";
+import ModalFooter from "react-bootstrap/ModalFooter";
 import Row from "react-bootstrap/Row";
 
 import { Canvas } from "./components/Canvas.jsx";
@@ -17,6 +20,7 @@ import { CharacterInput } from "./components/CharacterInput.jsx";
 import {
   CHAR_CUSTOM_COUNT,
   CHARACTERS,
+  exportCharacter,
   getBlankCharacter,
   importCharacter,
 } from "./characters.js";
@@ -39,6 +43,8 @@ export default function App() {
   const [content, setContent] = useState("");
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
+
+  const [shareURL, setShareURL] = useState(null);
 
   function resetCharacter(charID) {
     setCharacters((characters) =>
@@ -76,7 +82,7 @@ export default function App() {
     );
   }
 
-  function parseURLParameters() {
+  function importURLParameters() {
     const url = new URL(window.location.href);
 
     const width = Number.parseInt(url.searchParams.get("w"));
@@ -104,10 +110,48 @@ export default function App() {
     });
   }
 
-  useEffect(parseURLParameters, []);
+  function exportURLParameters() {
+    const url = new URL(window.location.href);
+    url.search = "";
+
+    url.searchParams.append("w", width);
+    url.searchParams.append("h", height);
+    url.searchParams.append("x", cursorX);
+    url.searchParams.append("y", cursorY);
+    url.searchParams.append("text", content);
+
+    const data = characters.slice(0, CHAR_CUSTOM_COUNT).map(exportCharacter);
+    url.searchParams.append("data", data.join(","));
+
+    return url.toString();
+  }
+
+  useEffect(() => {
+    importURLParameters();
+  }, []);
 
   return (
     <>
+      <Modal backdrop={false} show={!!shareURL}>
+        <ModalBody>
+          <p>Copy this URL or drag it to the bookmark bar:</p>
+          <p className="share-url">
+            <a href={shareURL}>{shareURL}</a>
+          </p>
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={() => setShareURL(null)} variant="light">
+            Close
+          </Button>
+        </ModalFooter>
+      </Modal>
+      <Button
+        className="mb-3"
+        onClick={() => setShareURL(exportURLParameters())}
+        variant="light"
+      >
+        Share Data
+      </Button>
       <Canvas
         characters={characters}
         content={content}
@@ -170,8 +214,7 @@ export default function App() {
         <br />
         <i className="opacity-50">
           Standalone backticks <code>`</code> and backslashes <code>\</code>{" "}
-          must be escaped. Further adaptation for C&nbsp;and Python code is
-          required.
+          must be escaped. Further adaptation might be required.
         </i>
       </p>
       <FormControl
@@ -191,8 +234,8 @@ export default function App() {
         </i>
         <br />
         <i className="opacity-50">
-          Skip it, try <code>\x08</code> instead, or send a&nbsp;single byte
-          directly.
+          Skip it in your source code, try <code>\x08</code> instead, or send
+          a&nbsp;single byte directly.
         </i>
       </p>
       <div className="custom-characters">

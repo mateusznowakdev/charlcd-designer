@@ -215,3 +215,13 @@ export function importCharacter(raw) {
 
   return bits.reverse();
 }
+
+export function exportCharacter(bits) {
+  let raw = 0;
+
+  for (const bit of bits) {
+    raw = raw * 2 + bit;
+  }
+
+  return raw;
+}
