@@ -48,7 +48,9 @@ h2 {
 }
 
 .btn {
+  align-items: center;
   display: flex;
+  gap: 0.5rem;
 }
 
 .container-fluid {

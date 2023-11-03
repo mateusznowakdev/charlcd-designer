@@ -1,4 +1,6 @@
 import ArrowRightLeft from "lucide-react/dist/esm/icons/arrow-right-left";
+import RotateCcw from "lucide-react/dist/esm/icons/rotate-ccw";
+import Share2 from "lucide-react/dist/esm/icons/share-2";
 import X from "lucide-react/dist/esm/icons/x";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -145,13 +147,20 @@ export default function App() {
           </Button>
         </ModalFooter>
       </Modal>
-      <Button
-        className="mb-3"
-        onClick={() => setShareURL(exportURLParameters())}
-        variant="light"
-      >
-        Share Data
-      </Button>
+      <ButtonToolbar>
+        <Button
+          className="mb-3"
+          onClick={() => setShareURL(exportURLParameters())}
+          variant="light"
+        >
+          <Share2 size={16} />
+          Share Data
+        </Button>
+        <Button className="mb-3 ms-2" href="?" variant="light">
+          <RotateCcw size={16} />
+          Reset
+        </Button>
+      </ButtonToolbar>
       <Canvas
         characters={characters}
         content={content}
@@ -249,7 +258,7 @@ export default function App() {
               <Button
                 onClick={() => resetCharacter(id)}
                 size="sm"
-                title="Reset"
+                title="Clear"
                 variant="light"
               >
                 <X size={16} />
