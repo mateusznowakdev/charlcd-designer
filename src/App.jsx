@@ -1,6 +1,6 @@
 import ArrowRightLeft from "lucide-react/dist/esm/icons/arrow-right-left";
 import X from "lucide-react/dist/esm/icons/x";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Col from "react-bootstrap/Col";
@@ -18,7 +18,12 @@ import {
   CHAR_CUSTOM_COUNT,
   CHARACTERS,
   getBlankCharacter,
+  importCharacter,
 } from "./characters.js";
+
+function compareCharID(actual, expected) {
+  return actual === expected || actual === expected + CHAR_CUSTOM_COUNT;
+}
 
 export default function App() {
   const DEFAULT_WIDTH = 16;
@@ -35,15 +40,17 @@ export default function App() {
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
 
-  function compareCharID(actual, expected) {
-    return actual === expected || actual === expected + CHAR_CUSTOM_COUNT;
-  }
-
   function resetCharacter(charID) {
     setCharacters((characters) =>
       characters.map((char, id) =>
         compareCharID(id, charID) ? getBlankCharacter() : char,
       ),
+    );
+  }
+
+  function setCharacter(charID, value) {
+    setCharacters((characters) =>
+      characters.map((char, id) => (compareCharID(id, charID) ? value : char)),
     );
   }
 
@@ -68,6 +75,36 @@ export default function App() {
       ),
     );
   }
+
+  function parseURLParameters() {
+    const url = new URL(window.location.href);
+
+    const width = Number.parseInt(url.searchParams.get("w"));
+    if (!Number.isNaN(width)) setWidth(width);
+
+    const height = Number.parseInt(url.searchParams.get("h"));
+    if (!Number.isNaN(height)) setHeight(height);
+
+    const cursorX = Number.parseInt(url.searchParams.get("x"));
+    if (!Number.isNaN(cursorX)) setCursorX(cursorX);
+
+    const cursorY = Number.parseInt(url.searchParams.get("y"));
+    if (!Number.isNaN(cursorY)) setCursorY(cursorY);
+
+    const content = url.searchParams.get("text") || "";
+    setContent(content);
+
+    const data = url.searchParams.get("data") || "";
+    data.split(",").filter((raw, idx) => {
+      const parsed = Number.parseInt(raw);
+      if (!Number.isNaN(parsed)) {
+        const bits = importCharacter(parsed);
+        setCharacter(idx, bits);
+      }
+    });
+  }
+
+  useEffect(parseURLParameters, []);
 
   return (
     <>

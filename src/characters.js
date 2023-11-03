@@ -197,7 +197,7 @@ CHARACTERS_RAW.splice(128, 0, ...Array(33).fill(0));
 export const CHAR_WIDTH = 5;
 export const CHAR_HEIGHT = 8;
 
-export const CHARACTERS = CHARACTERS_RAW.map(importCharacter);
+export const CHARACTERS = CHARACTERS_RAW.map((value) => importCharacter(value));
 
 export const CHAR_CUSTOM_COUNT = 8;
 
@@ -213,5 +213,5 @@ export function importCharacter(raw) {
     raw = Math.floor(raw / 2);
   }
 
-  return bits.reverse().slice(0, CHAR_WIDTH * CHAR_HEIGHT);
+  return bits.reverse();
 }
