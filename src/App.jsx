@@ -140,6 +140,11 @@ export default function App() {
           <p className="share-url">
             <a href={shareURL}>{content} &mdash; Character LCD Designer</a>
           </p>
+          <p>
+            This URL contains the information you've entered so far.
+            <br />
+            No user data is stored on the server.
+          </p>
         </ModalBody>
         <ModalFooter>
           <Button onClick={() => setShareURL(null)} variant="light">
