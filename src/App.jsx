@@ -138,7 +138,7 @@ export default function App() {
         <ModalBody>
           <p>Copy this URL or drag it to the bookmark bar:</p>
           <p className="share-url">
-            <a href={shareURL}>{shareURL}</a>
+            <a href={shareURL}>{content} &mdash; Character LCD Designer</a>
           </p>
         </ModalBody>
         <ModalFooter>
