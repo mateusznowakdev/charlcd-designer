@@ -10,14 +10,12 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import FormGroup from "react-bootstrap/FormGroup";
 import FormRange from "react-bootstrap/FormRange";
-import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalFooter from "react-bootstrap/ModalFooter";
 import Row from "react-bootstrap/Row";
 
 import { Canvas } from "./components/Canvas.jsx";
 import { CharacterCode } from "./components/CharacterCode.jsx";
 import { CharacterInput } from "./components/CharacterInput.jsx";
+import { ShareModal } from "./components/ShareModal.jsx";
 
 import {
   CHAR_CUSTOM_COUNT,
@@ -134,24 +132,11 @@ export default function App() {
 
   return (
     <>
-      <Modal backdrop={false} show={!!shareURL}>
-        <ModalBody>
-          <p>Copy this URL or drag it to the bookmark bar:</p>
-          <p className="share-url">
-            <a href={shareURL}>{content} &mdash; Character LCD Designer</a>
-          </p>
-          <p>
-            This URL contains the information you've entered so far.
-            <br />
-            No user data is stored on the server.
-          </p>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={() => setShareURL(null)} variant="light">
-            Close
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <ShareModal
+        content={content}
+        setShareURL={() => setShareURL(null)}
+        shareURL={shareURL}
+      />
       <ButtonToolbar>
         <Button
           className="mb-3"
