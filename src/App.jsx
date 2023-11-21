@@ -26,10 +26,10 @@ import {
 } from "./characters.js";
 
 const SAMPLE_DATA_URL =
-  "?w=16&h=2&x=16&y=0" +
+  "?initial=&w=16&h=2&x=16&y=0" +
   "&text=%5Cx7F+%5B%5Cx00%5D+%5Cx01++%5Cx02++%5Cx03++%5Cx7E%0A+++Hot+%2832%5CxDFC%29" +
   "&data=10755815424%2C11073533952%2C11072994304%2C11073438720%2C0%2C0%2C0%2C0";
-const BLANK_DATA_URL = "?";
+const BLANK_DATA_URL = "?initial=";
 
 function compareCharID(actual, expected) {
   return actual === expected || actual === expected + CHAR_CUSTOM_COUNT;
@@ -120,6 +120,7 @@ export default function App() {
     const url = new URL(window.location.href);
     url.search = "";
 
+    url.searchParams.append("initial", "");
     url.searchParams.append("w", width);
     url.searchParams.append("h", height);
     url.searchParams.append("x", cursorX);
