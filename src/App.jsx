@@ -1,7 +1,7 @@
 import ArrowRightLeft from "lucide-react/dist/esm/icons/arrow-right-left";
-import RotateCcw from "lucide-react/dist/esm/icons/rotate-ccw";
+import ArrowUpFromLine from "lucide-react/dist/esm/icons/arrow-up-from-line";
 import Share2 from "lucide-react/dist/esm/icons/share-2";
-import X from "lucide-react/dist/esm/icons/x";
+import Trash from "lucide-react/dist/esm/icons/trash";
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
@@ -24,6 +24,12 @@ import {
   getBlankCharacter,
   importCharacter,
 } from "./characters.js";
+
+const SAMPLE_DATA_URL =
+  "?w=16&h=2&x=16&y=0" +
+  "&text=%5Cx7F+%5B%5Cx00%5D+%5Cx01++%5Cx02++%5Cx03++%5Cx7E%0A+++Hot+%2832%5CxDFC%29" +
+  "&data=10755815424%2C11073533952%2C11072994304%2C11073438720%2C0%2C0%2C0%2C0";
+const BLANK_DATA_URL = "?";
 
 function compareCharID(actual, expected) {
   return actual === expected || actual === expected + CHAR_CUSTOM_COUNT;
@@ -137,20 +143,36 @@ export default function App() {
         setShareURL={() => setShareURL(null)}
         shareURL={shareURL}
       />
-      <ButtonToolbar>
+      <div className="d-flex justify-content-between">
         <Button
           className="mb-3"
           onClick={() => setShareURL(exportURLParameters())}
+          title="Share data"
           variant="light"
         >
           <Share2 size={16} />
           Share Data
         </Button>
-        <Button className="mb-3 ms-2" href="?" variant="light">
-          <RotateCcw size={16} />
-          Reset
-        </Button>
-      </ButtonToolbar>
+        <ButtonToolbar>
+          <Button
+            className="mb-3 ms-2"
+            href={SAMPLE_DATA_URL}
+            title="Load sample data"
+            variant="light"
+          >
+            <ArrowUpFromLine size={16} />
+            Load Sample
+          </Button>
+          <Button
+            className="mb-3 ms-2"
+            href={BLANK_DATA_URL}
+            title="Clear"
+            variant="light"
+          >
+            <Trash size={16} />
+          </Button>
+        </ButtonToolbar>
+      </div>
       <Canvas
         characters={characters}
         content={content}
@@ -251,7 +273,7 @@ export default function App() {
                 title="Clear"
                 variant="light"
               >
-                <X size={16} />
+                <Trash size={16} />
               </Button>
               <Button
                 onClick={() => swapCharacter(id)}
