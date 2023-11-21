@@ -148,17 +148,17 @@ export default function App() {
         <Button
           className="mb-3"
           onClick={() => setShareURL(exportURLParameters())}
-          title="Share data"
+          title="Share and save using a URL"
           variant="light"
         >
           <Share2 size={16} />
-          Share Data
+          Share and Save
         </Button>
         <ButtonToolbar>
           <Button
             className="mb-3 ms-2"
             href={SAMPLE_DATA_URL}
-            title="Load sample data"
+            title="Load sample data and update the URL"
             variant="light"
           >
             <ArrowUpFromLine size={16} />
@@ -167,7 +167,7 @@ export default function App() {
           <Button
             className="mb-3 ms-2"
             href={BLANK_DATA_URL}
-            title="Clear"
+            title="Clear and reset the URL"
             variant="light"
           >
             <Trash size={16} />
