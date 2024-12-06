@@ -11,7 +11,7 @@ export function ShareModal({ content, setShareURL, shareURL }) {
         <p className="share-url">
           <a href={shareURL}>{content} &mdash; Character LCD Designer</a>
         </p>
-        <p>
+        <p className="opacity-50">
           This URL contains the information you've entered so far.
           <br />
           No user data is stored on the server.

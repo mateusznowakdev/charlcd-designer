@@ -25,9 +25,9 @@ import { CharacterInput } from "./components/CharacterInput.jsx";
 import { ShareModal } from "./components/ShareModal.jsx";
 
 const SAMPLE_DATA_URL =
-  "?initial=&w=16&h=2&x=16&y=0" +
-  "&text=%5Cx7F+%5B%5Cx00%5D+%5Cx01++%5Cx02++%5Cx03++%5Cx7E%0A+++Hot+%2832%5CxDFC%29" +
-  "&data=10755815424%2C11073533952%2C11072994304%2C11073438720%2C0%2C0%2C0%2C0";
+  "?initial=&w=16&h=2&x=15&y=1" +
+  "&text=++%5B%5Cx00%5D+%5Cx01++%5Cx02++%5Cx03%0A+++++Up+90%5CxDF" +
+  "&data=153511672800%2C149913600%2C1054998528%2C1080319522944%2C0%2C0%2C0%2C0";
 const BLANK_DATA_URL = "?initial=";
 
 function compareCharID(actual, expected) {
@@ -148,7 +148,6 @@ export default function App() {
           className="mb-3"
           onClick={() => setShareURL(exportURLParameters())}
           title="Share and save using a URL"
-          variant="light"
         >
           <Share2 size={16} />
           Share and Save
@@ -186,7 +185,7 @@ export default function App() {
           <Col xs={2}>
             Size ({width} x {height})
           </Col>
-          <Col xs={8}>
+          <Col xs={7}>
             <FormRange
               min={0}
               max={MAX_WIDTH}
@@ -207,7 +206,7 @@ export default function App() {
           <Col xs={2}>
             Cursor ({cursorX}, {cursorY})
           </Col>
-          <Col xs={8}>
+          <Col xs={7}>
             <FormRange
               min={0}
               max={MAX_WIDTH}
@@ -230,18 +229,18 @@ export default function App() {
         <br />
         <i className="opacity-50">
           You can enter any character as a&nbsp;hex value <code>\x00</code> to{" "}
-          <code>\xff</code>. Some symbols may look different, see the LCD docs.
+          <code>\xff</code>. Some symbols may look different, check your LCD
+          docs.
         </i>
         <br />
         <i className="opacity-50">
-          Standalone backticks <code>`</code> and backslashes <code>\</code>{" "}
-          must be escaped. Further adaptation might be required.
+          Standalone backticks and backslashes must be escaped. Further
+          adaptation might be required.
         </i>
       </p>
       <FormControl
         as="textarea"
         className="my-3"
-        cols={MAX_WIDTH}
         onChange={(e) => setContent(e.target.value)}
         rows={MAX_HEIGHT / 2}
         value={content}
@@ -269,7 +268,6 @@ export default function App() {
             <ButtonToolbar className="gap-1">
               <Button
                 onClick={() => resetCharacter(id)}
-                size="sm"
                 title="Clear"
                 variant="light"
               >
@@ -277,7 +275,6 @@ export default function App() {
               </Button>
               <Button
                 onClick={() => swapCharacter(id)}
-                size="sm"
                 title="Swap with the next character"
                 variant="light"
               >
