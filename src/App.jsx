@@ -12,18 +12,17 @@ import FormGroup from "react-bootstrap/FormGroup";
 import FormRange from "react-bootstrap/FormRange";
 import Row from "react-bootstrap/Row";
 
-import { Canvas } from "./components/Canvas.jsx";
-import { CharacterCode } from "./components/CharacterCode.jsx";
-import { CharacterInput } from "./components/CharacterInput.jsx";
-import { ShareModal } from "./components/ShareModal.jsx";
-
 import {
-  CHAR_CUSTOM_COUNT,
   CHARACTERS,
+  CHAR_CUSTOM_COUNT,
   exportCharacter,
   getBlankCharacter,
   importCharacter,
 } from "./characters.js";
+import { Canvas } from "./components/Canvas.jsx";
+import { CharacterCode } from "./components/CharacterCode.jsx";
+import { CharacterInput } from "./components/CharacterInput.jsx";
+import { ShareModal } from "./components/ShareModal.jsx";
 
 const SAMPLE_DATA_URL =
   "?initial=&w=16&h=2&x=16&y=0" +

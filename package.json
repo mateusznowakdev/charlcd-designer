@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -7,14 +6,28 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "lucide-react": "^0.367.0",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.10.2",
-    "react-dom": "^18.2.0"
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.6",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.1",
-    "prettier": "^3.2.5",
-    "vite": "^5.2.8"
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "prettier": "^3.4.2",
+    "vite": "^6.0.3"
+  },
+  "prettier": {
+    "importOrder": [
+      "<THIRD_PARTY_MODULES>",
+      "^[./]"
+    ],
+    "importOrderGroupNamespaceSpecifiers": true,
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "proseWrap": "always"
   }
 }
