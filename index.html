@@ -1,18 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="description"
-      content="Create custom characters for HD44780 and test live in a sequence on a freely resizable canvas"
-    />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://mateusznowak.dev/index.css"
-      type="text/css"
-    />
-    <title>Character LCD Designer &ndash; Mateusz Nowak</title>
+    <meta name="description" content="Custom glyphs designer for HD44780 displays of any size. Live preview and sharing/saving via URL. Using React and HTML5 Canvas." />
+    <meta name="author" content="Mateusz Nowak" />
+    <meta property="og:url" content="https://mateusznowak.dev/projects/charlcd-designer/" />
+    <meta property="og:title" content="Character LCD designer" />
+    <meta property="og:description" content="Custom glyphs designer for HD44780 displays of any size. Live preview and sharing/saving via URL. Using React and HTML5 Canvas." />
+    <meta property="og:image" content="https://mateusznowak.dev/projects/charlcd-designer/thumb.webp" />
+    <link rel="stylesheet" href="https://mateusznowak.dev/static/css/index.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://mateusznowak.dev/static/css/code.min.css" type="text/css" />
+    <link rel="alternate" href="https://mateusznowak.dev/atom.xml" type="application/atom+xml" />
+    <link rel="canonical" href="https://mateusznowak.dev/projects/charlcd-designer/" />
+    <link rel="icon" type="image/png" href="https://mateusznowak.dev/static/favicon.png" />
+    <title>Character LCD designer &ndash; Mateusz Nowak</title>
   </head>
   <body>
     <header>
@@ -23,56 +25,19 @@
     </header>
     <main>
       <section>
-        <p class="large">
-          Use this interactive web application to design custom characters and
-          various text layouts for HD44780 display of any size
-        </p>
-        <p class="date">
-          Published on January 1, 2023 &middot; Reading time: 1 minute
-        </p>
+        <p class="large">Use this interactive web application to design custom characters and various text layouts for HD44780 display of any size</p>
       </section>
       <section>
         <p class="buttons">
-          <a
-            class="button"
-            href="https://github.com/mateusznowakdev/charlcd-designer"
-            target="_blank"
-            rel="noopener"
-            >Code on GitHub</a
-          >
+          <a class="button" href="https://github.com/mateusznowakdev/charlcd-designer" target="_blank" rel="noopener">Code on GitHub</a>
         </p>
       </section>
       <div id="root"></div>
       <section>
         <h2>What is this?</h2>
-        <p>
-          I use HD44780 character displays in my projects, both I2C and
-          parallel. Unfortunately, I couldn't find any online tool that would
-          allow me to create custom characters AND test them in a sequence at
-          the same time. I could use a spare Raspberry Pi or Arduino, but it
-          would require me to have some free space on my desk, connect all the
-          wires, including pull-up resistors, and upload a new program every
-          single time.
-        </p>
-        <p>
-          This web application implements the Hitachi HD44780 character map (ROM
-          Code A00: ASCII, Japanese, European characters, math symbols). It is
-          possible to change the memory data for the first 8 characters and get
-          their binary representation, compatible with
-          <code>createChar()</code> function. The text you enter must be a valid
-          JavaScript multiline string, so it can be copied over to your own
-          script with little to no changes, regardless of the programming
-          language you use. It is also possible to change the display size and
-          move the cursor around. Click the <b>Load Sample</b> button to get
-          started.
-        </p>
-        <p>
-          This utility is designed for developers who already know how to use
-          the HD44780 display with their programming language of choice.
-          Unfortunately, it is not possible for me to provide examples for every
-          language, microcontroller or library. Check out the Arduino,
-          MicroPython or CircuitPython docs instead.
-        </p>
+        <p>I use HD44780 character displays in my projects, both I2C and parallel. Unfortunately, I couldn't find any online tool that would allow me to create custom characters AND test them in a sequence at the same time. I could use a spare Raspberry Pi or Arduino, but it would require me to have some free space on my desk, connect all the wires, including pull-up resistors, and upload a new program every single time.</p>
+        <p>This web application implements the Hitachi HD44780 character map (ROM Code A00: ASCII, Japanese, European characters, math symbols). It is possible to change the memory data for the first 8 characters and get their binary representation, compatible with <code>createChar()</code> function. The text you enter must be a valid JavaScript multiline string, so it can be copied over to your own script with little to no changes, regardless of the programming language you use. It is also possible to change the display size and move the cursor around. Click the <b>Load Sample</b> button to get started.</p>
+        <p>This utility is designed for developers who already know how to use the HD44780 display with their programming language of choice. Unfortunately, it is not possible for me to provide examples for every language, microcontroller or library. Check out the Arduino, MicroPython or CircuitPython docs instead.</p>
       </section>
     </main>
     <footer>
@@ -81,30 +46,10 @@
       </p>
       <p>
         &copy; Mateusz Nowak<br />
-        Licensed under
-        <a
-          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-          target="_blank"
-          rel="license noopener noreferrer"
-          >CC BY-NC-SA 4.0</a
-        >, unless noted otherwise.<br />
-        Using
-        <a href="https://rsms.me/inter/" target="_blank" rel="noopener">Inter</a
-        >,
-        <a
-          href="https://www.jetbrains.com/lp/mono/"
-          target="_blank"
-          rel="noopener"
-          >JetBrains Mono</a
-        >,
-        <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a>.
+        Using <a href="https://rsms.me/inter/" target="_blank" rel="noopener">Inter</a>, <a href="https://www.jetbrains.com/lp/mono/" target="_blank" rel="noopener">JetBrains Mono</a>, <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a>.
       </p>
       <a href="#" title="Scroll to the top">
-        <img
-          class="up"
-          alt="Scroll to the top"
-          src="https://mateusznowak.dev/images/up.webp"
-        />
+        <img class="up" alt="Scroll to the top" src="https://mateusznowak.dev/static/images/up.webp" />
       </a>
     </footer>
     <script type="module" src="/src/main.jsx"></script>
